@@ -51,33 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# Anjuta & others
-*.c~
-*~
-minishell
-.hystory
-!/src/*
-!/src/corewar/*
-!/src/asm/*
-!/src/disasm/*
-!/src/corewar/proc/*
-.anjuta
-.anjuta_sym_db.db
-src/Makefile.am
-AUTHORS
-COPYING
-ChangeLog
-Makefile.am
-NEWS
-README
-autogen.sh
-configure.ac
-ft_ls.anjuta
-
-# CLion
-.idea/
-#CMakeLists.txt
+# For CLion
+.idea
 cmake-build-debug/
-
-# Vim
-*.swp
