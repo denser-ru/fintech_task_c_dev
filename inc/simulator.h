@@ -31,7 +31,7 @@ int	ft_get_request(t_sim *sim);
 /*
 ** ft_order_functions.c
 */
-void	ft_ex_order_func(int f, t_order *order, char *s1, char *s2);
+void	ft_ex_order_func(int f, t_order *order, const char *s1, const char *s2);
 
 /*
 ** ft_exit.c
