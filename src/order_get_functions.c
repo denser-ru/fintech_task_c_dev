@@ -11,7 +11,8 @@ void	ft_ex_order_func(int f, t_order *order, const char *s1, const char *s2)
 			&ft_get_order_id,
 			&ft_get_order_side,
 			ft_get_order_qty,
-			ft_get_order_price
+			ft_get_order_price,
+			NULL
 	};
 
 	(run_func[f])(order, s1, s2);

@@ -98,4 +98,4 @@ add_executable(simulator
         libft/src/get/ft_getch.c
         libft/src/get/ft_getint.c
         libft/src/get/get_next_line.c
-        src/ft_exit.c src/get_request.c src/ft_order_functions.c)
+        src/exit.c src/get_request.c src/order_get_functions.c)

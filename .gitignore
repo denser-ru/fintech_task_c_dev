@@ -54,7 +54,7 @@ dkms.conf
 # Anjuta & others
 *.c~
 *~
-minishell
+simulator
 .hystory
 !/src/*
 !/src/corewar/*

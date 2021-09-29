@@ -26,7 +26,7 @@ struct s_order
 /*
 ** get_request.c
 */
-int	ft_get_request(t_sim *sim);
+int	ft_get_request(t_sim *sim, t_order *order);
 
 /*
 ** ft_order_functions.c
