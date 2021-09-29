@@ -18,7 +18,9 @@ struct s_order
 	int		id;
 	char	side;
 	int		qty;
-	float	price;
+	int		price;
+	int		price_d;
+	int		price_f;
 };
 
 /*
