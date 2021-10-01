@@ -25,6 +25,7 @@ static int	ft_get_order(t_sim *sim, t_order *order)
 
 	s1 = sim->read_line + 2;
 	s2 = s1;
+	order->type = 'O';
 	f = 0;
 	while (*s2 && f < 4)
 	{
@@ -42,6 +43,7 @@ static int	ft_get_order(t_sim *sim, t_order *order)
 
 static int	ft_get_cancel(t_sim *sim, t_order *order)
 {
+	order->type = 'C';
 	order->side = *sim->read_line;
 	order->id = ft_atoi(sim->read_line + 2);
 	return (0);

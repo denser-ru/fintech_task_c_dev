@@ -10,12 +10,16 @@ typedef struct s_order	t_order;
 struct s_sim
 {
 	char	*read_line;
-	t_order	*orders;
+	t_list	*s_orders;
+	t_list	*b_orders;
+	int		price_s_min;
+	int		price_b_max;
 };
 
 struct s_order
 {
 	int		id;
+	char	type;
 	char	side;
 	int		qty;
 	int		price;
@@ -26,7 +30,17 @@ struct s_order
 /*
 ** get_request.c
 */
-int	ft_get_request(t_sim *sim, t_order *order);
+int		ft_get_request(t_sim *sim, t_order *order);
+
+/*
+** get_request.c
+*/
+int		ft_ex_request(t_sim *sim, t_order *order);
+
+/*
+** order_s_add.c
+*/
+int		ft_order_add(t_sim *sim, t_order *order, char side);
 
 /*
 ** ft_order_functions.c
@@ -34,8 +48,14 @@ int	ft_get_request(t_sim *sim, t_order *order);
 void	ft_ex_order_func(int f, t_order *order, const char *s1, const char *s2);
 
 /*
+** order_ex.c
+*/
+int	ft_order_s_ex(t_sim *sim, t_order *order);
+int	ft_order_b_ex(t_sim *sim, t_order *order);
+
+/*
 ** ft_exit.c
 */
-int			ft_err_exit(t_sim *sim, char *msg, int err);
+int		ft_err_exit(t_sim *sim, char *msg, int err);
 
 #endif
