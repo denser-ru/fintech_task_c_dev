@@ -22,9 +22,8 @@ int	ft_ex_request(t_sim *sim, t_order *order)
 
 static int ft_ex_order_s(t_sim *sim, t_order *order)
 {
-	if (!sim->s_orders)
-		sim->price_s_min = order->price;
-	if (order->price > sim->price_b_max)
+	if (!sim->b_orders
+			|| order->price < ((t_order *)sim->b_orders->content)->price)
 		return (ft_order_add(sim, order, 'S'));
 	else
 		return (ft_order_s_ex(sim, order));
@@ -32,9 +31,8 @@ static int ft_ex_order_s(t_sim *sim, t_order *order)
 
 static int ft_ex_order_b(t_sim *sim, t_order *order)
 {
-	if (!sim->b_orders)
-		sim->price_b_max = order->price;
-	if (order->price < sim->price_s_min)
+	if (!sim->s_orders
+		|| order->price > ((t_order *)sim->s_orders->content)->price)
 		return (ft_order_add(sim, order, 'B'));
 	else
 		return (ft_order_b_ex(sim, order));
@@ -49,7 +47,7 @@ t_list	*ft_find_order(t_list *root, int id)
 	cur = root;
 	while (cur)
 	{
-		if (((t_order *)cur)->id == id)
+		if (((t_order *)cur->content)->id == id)
 			return (cur);
 		cur = cur->next;
 	}
@@ -64,5 +62,6 @@ static int ft_ex_order_c(t_sim *sim, int id)
 	if (!order_list)
 		return (1);
 	ft_lstcut(&sim->s_orders, order_list, ft_lstdelcontent);
+	printf("X,%d\n", id);
 	return (0);
 }

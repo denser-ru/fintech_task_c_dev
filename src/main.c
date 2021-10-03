@@ -27,7 +27,7 @@ int	ft_loop(t_sim *sim)
 	int			i;
 	t_order		order;
 
-	i = 15;
+	i = 135;
 	while (!ft_get_request(sim, &order) && i--)
 		ft_ex_request(sim, &order);
 	return (0);
