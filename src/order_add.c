@@ -1,6 +1,6 @@
 #include "simulator.h"
 
-int	ft_order_insert(t_sim *sim, t_list **root, t_list *new, t_list *prev);
+int	ft_order_insert(t_list **root, t_list *new, t_list *prev);
 
 int	ft_order_add(t_sim *sim, t_order *order, char side)
 {
@@ -23,11 +23,11 @@ int	ft_order_add(t_sim *sim, t_order *order, char side)
 		prev = cur;
 		cur = cur->next;
 	}
-	ft_order_insert(sim, root, order_list, prev);
+	ft_order_insert(root, order_list, prev);
 	return (0);
 }
 
-int	ft_order_insert(t_sim *sim, t_list **root, t_list *new, t_list *prev)
+int	ft_order_insert(t_list **root, t_list *new, t_list *prev)
 {
 	if (prev)
 	{

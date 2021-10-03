@@ -19,6 +19,7 @@ int	ft_init(t_sim **sim)
 	*sim = (t_sim *)ft_memalloc(sizeof(t_sim));
 	if (!*sim)
 		return (1);
+	++(*sim)->transactions;
 	return (0);
 }
 

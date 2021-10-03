@@ -20,7 +20,7 @@ inline static t_list	*ft_lstcut_check(t_list **root, t_list *cut,
 	else
 		*prev = *root;
 	*root = *prev;
-	if (*root == cut->next)
+	if (*root && *root == cut->next)
 	{
 		ft_lstdelone(&cut, del);
 		return (NULL);

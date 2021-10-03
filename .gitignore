@@ -74,6 +74,9 @@ autogen.sh
 configure.ac
 ft_ls.anjuta
 
+#Mac OS
+.DS_Store
+
 # CLion
 .idea/
 #CMakeLists.txt
