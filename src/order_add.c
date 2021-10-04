@@ -18,7 +18,9 @@ int	ft_order_add(t_sim *sim, t_order *order, char side)
 	cur = *root;
 	while (cur && ((side == 'S'
 			&& order->price > ((t_order *)cur->content)->price)
-			|| order->price < ((t_order *)cur->content)->price))
+			||
+			(side == 'B'
+			 && order->price < ((t_order *)cur->content)->price)))
 	{
 		prev = cur;
 		cur = cur->next;
@@ -34,8 +36,10 @@ int	ft_order_insert(t_list **root, t_list *new, t_list *prev)
 		if (prev->next)
 			new->next = prev->next;
 		prev->next = new;
+		return (0);
 	}
-	else
-		*root = new;
+	else if (*root)
+		new->next = *root;
+	*root = new;
 	return (0);
 }

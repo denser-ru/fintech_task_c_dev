@@ -45,8 +45,8 @@ static void	do_trans(t_sim *sim, t_list **root, t_list *cur, t_order *order)
 	if (((t_order *)cur->content)->qty > order->qty)
 	{
 		((t_order *)cur->content)->qty -= order->qty;
-		order->qty = 0;
 		put_trade(sim, (t_order *)cur->content, order, order->qty);
+		order->qty = 0;
 	}
 	else if (((t_order *)cur->content)->qty == order->qty)
 	{
@@ -56,25 +56,17 @@ static void	do_trans(t_sim *sim, t_list **root, t_list *cur, t_order *order)
 	}
 	else
 	{
-		order->qty -= ((t_order *)cur->content)->qty;
 		put_trade(sim, (t_order *)cur->content, order,
 				  ((t_order *)cur->content)->qty);
+		order->qty -= ((t_order *)cur->content)->qty;
 		ft_lstcut(root, cur, ft_lstdelcontent);
 	}
-//	if (!((t_order *)cur->content)->qty)
-//		ft_lstcut(root, cur, ft_lstdelcontent);
 }
 
 static int	put_trade(t_sim *sim, t_order *order_1, t_order *order_2, int qty)
 {
-	t_order *order;
-
-	if (order_1->side == 'S')
-		order = order_1;
-	else
-		order = order_2;
 	printf("T,%d,%c,%d,%d,%d,%d.%d\n", (int)sim->transactions, order_1->side,
-		order_1->id, order_2->id, qty, order->price_d, order->price_f);
+		order_1->id, order_2->id, qty, order_1->price_d, order_1->price_f);
 	++sim->transactions;
 	return (0);
 }

@@ -102,4 +102,4 @@ add_executable(simulator
         src/get_request.c
         src/ex_request.c
         src/order_get_functions.c
-        src/exit.c src/order_add.c src/order_ex.c)
+        src/exit.c src/order_add.c src/order_ex.c src/tests.c)

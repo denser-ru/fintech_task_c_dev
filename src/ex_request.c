@@ -57,7 +57,7 @@ t_list	*ft_find_order(t_list *root, int id)
 static int ft_ex_order_c(t_sim *sim, int id)
 {
 	t_list	*order_list;
-	t_list	*root;
+	t_list	**root;
 
 	order_list = ft_find_order(sim->s_orders, id);
 	if (!order_list)
@@ -65,10 +65,10 @@ static int ft_ex_order_c(t_sim *sim, int id)
 	if (!order_list)
 		return (1);
 	if (((t_order *)order_list->content)->side == 'S')
-		root = sim->s_orders;
+		root = &sim->s_orders;
 	else
-		root = sim->b_orders;
-	ft_lstcut(&root, order_list, ft_lstdelcontent);
+		root = &sim->b_orders;
+	ft_lstcut(root, order_list, ft_lstdelcontent);
 	printf("X,%d\n", id);
 	return (0);
 }
