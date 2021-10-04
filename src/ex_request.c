@@ -1,5 +1,4 @@
 #include "simulator.h"
-#include <stdio.h>
 
 static int ft_ex_order_s(t_sim *sim, t_order *order);
 static int ft_ex_order_b(t_sim *sim, t_order *order);
@@ -69,6 +68,10 @@ static int ft_ex_order_c(t_sim *sim, int id)
 	else
 		root = &sim->b_orders;
 	ft_lstcut(root, order_list, ft_lstdelcontent);
-	printf("X,%d\n", id);
+	ft_putnstr_mem(sim->buf, "X,", 2);
+	ft_putnbr_mem(sim->buf, id);
+	ft_putchar_mem(sim->buf, '\n');
+	ft_putnstr(sim->buf->mem, sim->buf->count);
+	ft_putmem_reset(sim->buf);
 	return (0);
 }

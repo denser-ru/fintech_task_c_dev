@@ -1,8 +1,10 @@
 #ifndef SIMULATOR_H
-#define SIMULATOR_H
+# define SIMULATOR_H
 
 # include "libft.h"
 # include "get_next_line.h"
+
+
 
 typedef struct s_sim	t_sim;
 typedef struct s_order	t_order;
@@ -26,6 +28,11 @@ struct s_order
 	int		price_d;
 	int		price_f;
 };
+
+/*
+** main.c
+*/
+void	ft_sim_mem_clear(t_sim **sim);
 
 /*
 ** get_request.c

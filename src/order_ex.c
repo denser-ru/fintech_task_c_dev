@@ -1,5 +1,4 @@
 #include "simulator.h"
-#include <stdio.h>
 
 static void	do_trans(t_sim *sim, t_list **root, t_list *cur, t_order *order);
 static int	put_trade(t_sim *sim, t_order *order_1, t_order *order_2, int qty);
@@ -63,10 +62,33 @@ static void	do_trans(t_sim *sim, t_list **root, t_list *cur, t_order *order)
 	}
 }
 
+void	ft_print_trade(t_sim *sim, t_order *order_1, t_order *order_2, int qty)
+{
+	ft_putnstr_mem(sim->buf, "T,", 2);
+	ft_putnbr_mem(sim->buf, sim->transactions);
+	ft_putchar_mem(sim->buf, ',');
+	ft_putchar_mem(sim->buf, order_1->side);
+	ft_putchar_mem(sim->buf, ',');
+	ft_putnbr_mem(sim->buf, order_1->id);
+	ft_putchar_mem(sim->buf, ',');
+	ft_putnbr_mem(sim->buf, order_2->id);
+	ft_putchar_mem(sim->buf, ',');
+	ft_putnbr_mem(sim->buf, qty);
+	ft_putchar_mem(sim->buf, ',');
+	ft_putnbr_mem(sim->buf, order_1->price_d);
+	ft_putchar_mem(sim->buf, '.');
+	if (order_1->price_f > 0 && order_1->price_f  % 10)
+		ft_putnbr_mem(sim->buf, order_1->price_f);
+	else
+		ft_putnbr_mem(sim->buf, order_1->price_f / 10);
+	ft_putchar_mem(sim->buf, '\n');
+	ft_putnstr(sim->buf->mem, sim->buf->count);
+	ft_putmem_reset(sim->buf);
+}
+
 static int	put_trade(t_sim *sim, t_order *order_1, t_order *order_2, int qty)
 {
-	printf("T,%d,%c,%d,%d,%d,%d.%d\n", (int)sim->transactions, order_1->side,
-		order_1->id, order_2->id, qty, order_1->price_d, order_1->price_f);
+	ft_print_trade(sim, order_1, order_2, qty);
 	++sim->transactions;
 	return (0);
 }

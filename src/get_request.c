@@ -14,6 +14,7 @@ int	ft_get_request(t_sim *sim, t_order *order)
 		ft_get_cancel(sim, order);
 	else
 		ft_err_exit(sim, "ошибка формата ввода данных", 1);
+	ft_strdel(&sim->read_line);
 	return (0);
 }
 

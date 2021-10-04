@@ -59,9 +59,9 @@ int	ft_putnstr_mem(t_putmem *out, char const *s, size_t n)
 
 inline static void to_mem(t_putmem *out, char s[13], int i)
 {
-	ft_memcpy(out->p, &s[i + 1], 12 - i);
-	out->count += 12 - i;
-	out->p += 12 - i;
+	ft_memcpy(out->p, &s[i + 1], 11 - i);
+	out->count += 11 - i;
+	out->p += 11 - i;
 }
 
 int	ft_putnbr_mem(t_putmem *out, int n)
@@ -72,7 +72,9 @@ int	ft_putnbr_mem(t_putmem *out, int n)
 
 	if (n == 0)
 	{
-		*out->p = '0';
+//		*out->p = '0';
+		s[0] = '0';
+		to_mem(out, s, 10);
 		return (1);
 	}
 	i = 11;
@@ -91,4 +93,10 @@ int	ft_putnbr_mem(t_putmem *out, int n)
 		s[i--] = '-';
 	to_mem(out, s, i);
 	return (11 - i);
+}
+
+void	ft_putmem_reset(t_putmem *buf)
+{
+	buf->p = buf->mem;
+	buf->count = 0;
 }
