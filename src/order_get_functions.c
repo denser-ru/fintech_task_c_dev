@@ -39,15 +39,22 @@ int	ft_get_order_qty(t_order *order, const char *s1, const char *s2)
 
 int	ft_get_order_price(t_order *order, const char *s1, const char *s2)
 {
-	order->price_d = ft_atoi_n(s1, s2 - s1);
+	order->price_len = s2 - s1;
+	ft_memcpy(order->price_s, s1, order->price_len);
+	order->price = ft_atoi_n(s1, order->price_len) * 100;
 	while (*s1 && *s1 != '.')
 		++s1;
 	if (*s1 && *(++s1))
+		order->price += (*s1 - '0') * 10;
+	if (*s1 && *(++s1))
 	{
-		order->price_f += (*s1 - '0') * 10;
-		if (*s1 && *(++s1))
-			order->price_f += *s1 - '0';
+		if (*s1 == '0')
+		{
+			*(char *)s1 = '\0';
+			--order->price_len;
+		}
+		else
+			order->price += *s1 - '0';
 	}
-	order->price = order->price_d * 100 + order->price_f;
 	return (0);
 }

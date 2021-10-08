@@ -55,6 +55,7 @@ dkms.conf
 *.c~
 *~
 simulator
+data/res.txt
 .hystory
 !/src/*
 !/src/corewar/*

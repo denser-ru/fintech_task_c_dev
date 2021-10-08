@@ -16,10 +16,18 @@ inline static t_list	*ft_lstcut_check(t_list **root, t_list *cut,
 							t_list **prev, void (*del)(void *, size_t))
 {
 	if (*root == cut)
+	{
+		if (!cut->next)
+		{
+			ft_lstdelone(&cut, del);
+			*root = NULL;
+			return (NULL);
+		}
 		*prev = cut->next;
+		*root = *prev;
+	}
 	else
 		*prev = *root;
-	*root = *prev;
 	if (*root && *root == cut->next)
 	{
 		ft_lstdelone(&cut, del);

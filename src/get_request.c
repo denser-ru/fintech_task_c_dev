@@ -5,8 +5,13 @@ static int	ft_get_cancel(t_sim *sim, t_order *order);
 
 int	ft_get_request(t_sim *sim, t_order *order)
 {
+	if (FT_DEV && ++sim->test_i == FT_STOP)
+		ft_err_exit(sim, "(dev) STOP", 1);
 	if (!get_next_line(0, &sim->read_line))
+	{
+		ft_strdel(&sim->read_line);
 		return (1);
+	}
 	ft_bzero(order, sizeof(t_order));
 	if (*sim->read_line == 'O')
 		ft_get_order(sim, order);

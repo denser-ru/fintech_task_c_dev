@@ -67,7 +67,7 @@ static int ft_ex_order_c(t_sim *sim, int id)
 		root = &sim->s_orders;
 	else
 		root = &sim->b_orders;
-	ft_lstcut(root, order_list, ft_lstdelcontent);
+	ft_lstcut_test(sim, root, order_list, ft_lstdelcontent);
 	ft_putnstr_mem(sim->buf, "X,", 2);
 	ft_putnbr_mem(sim->buf, id);
 	ft_putchar_mem(sim->buf, '\n');
