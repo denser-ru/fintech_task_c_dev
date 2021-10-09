@@ -5,7 +5,7 @@ int	ft_get_order_side(t_order *order, const char *s1, const char *s2);
 int	ft_get_order_qty(t_order *order, const char *s1, const char *s2);
 int	ft_get_order_price(t_order *order, const char *s1, const char *s2);
 
-void	ft_ex_order_func(int f, t_order *order, const char *s1, const char *s2)
+int	ft_ex_order_func(int f, t_order *order, const char *s1, const char *s2)
 {
 	static int (*run_func[])(t_order *, const char *, const char *) = {
 			&ft_get_order_id,
@@ -15,7 +15,7 @@ void	ft_ex_order_func(int f, t_order *order, const char *s1, const char *s2)
 			NULL
 	};
 
-	(run_func[f])(order, s1, s2);
+	return ((run_func[f])(order, s1, s2));
 }
 
 int	ft_get_order_id(t_order *order, const char *s1, const char *s2)
@@ -46,6 +46,8 @@ int	ft_get_order_price(t_order *order, const char *s1, const char *s2)
 		++s1;
 	if (*s1 && *(++s1))
 		order->price += (*s1 - '0') * 10;
+	else
+		return (1);
 	if (*s1 && *(++s1))
 	{
 		if (*s1 == '0')

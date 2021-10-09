@@ -56,7 +56,7 @@ int		ft_order_add(t_sim *sim, t_order *order, char side);
 /*
 ** ft_order_functions.c
 */
-void	ft_ex_order_func(int f, t_order *order, const char *s1, const char *s2);
+int		ft_ex_order_func(int f, t_order *order, const char *s1, const char *s2);
 
 /*
 ** order_ex.c

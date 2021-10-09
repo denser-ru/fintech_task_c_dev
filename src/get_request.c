@@ -43,14 +43,20 @@ static int	ft_get_order(t_sim *sim, t_order *order)
 		}
 		s2++;
 	}
-	ft_ex_order_func(f, order, s1, s2);
+	if (f < 3 || ft_ex_order_func(f, order, s1, s2))
+		ft_err_exit(sim, "ошибка формата ввода данных", 1);
 	return (0);
 }
 
 static int	ft_get_cancel(t_sim *sim, t_order *order)
 {
+	char	*s;
+
+	s = sim->read_line;
 	order->type = 'C';
-	order->side = *sim->read_line;
-	order->id = ft_atoi(sim->read_line + 2);
+	order->side = 'C';
+	if (!*(++s) || !*(++s))
+		ft_err_exit(sim, "ошибка формата ввода данных", 1);
+	order->id = ft_atoi(s);
 	return (0);
 }
