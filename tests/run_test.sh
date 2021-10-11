@@ -1,10 +1,25 @@
 #!/bin/bash
 
+cd fintech_task_c_dev
+
+COLOR='\e[34m'
+
+ver="dev-v1.x dev-v1.x-printf"
+
+if [ -z "$1" ]
+then
+  n=10
+else
+  n=$1
+fi
+
+echo -e "\nУстановлено значени количества измерений на одну версию - ${n}"
+sleep 0.5
+
 function metric {
 
   MAX=0
   SUM=0
-  n=10
 
   for (( i = 0; i < n; i++ ))
   do
@@ -32,16 +47,23 @@ function metric {
   AVR=$(bc<<<"scale=4;$SUM/$i")
   MIN=$(bc<<<"scale=4;$MIN/1")
   MAX=$(bc<<<"scale=4;$MAX/1")
-  echo "min: 0${MIN};  max: 0${MAX};  avr: 0${AVR}"
+  echo -en "${COLOR}"
+  echo -e "Версия $(git branch --show-current) \t--> \tmin: 0${MIN};  max: 0${MAX};  avr: 0${AVR}"
+  echo -en "\e[0m"
 }
 
-rm ./simulator
-make
-
-git checkout dev-v1.x
-echo "Измерение версии "$(git branch --show-current)
-metric
-
-git checkout dev-v1.x-printf
-echo "Измерение версии "$(git branch --show-current)
-metric
+for v in $ver
+do
+  git checkout ${v}
+  echo
+  echo -n "Сборка образца ${v}"
+  if (( $(make > /dev/null) ))
+    then
+      echo " - [ERR]"
+      exit 1
+    else
+      echo " - [OK]"
+    fi
+  echo -n "Измерение "
+  metric
+done
