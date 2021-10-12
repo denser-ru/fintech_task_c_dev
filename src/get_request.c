@@ -1,17 +1,25 @@
 #include "simulator.h"
+#include <stdio.h>
 
 static int	ft_get_order(t_sim *sim, t_order *order);
 static int	ft_get_cancel(t_sim *sim, t_order *order);
 
 int	ft_get_request(t_sim *sim, t_order *order)
 {
+	size_t	size;
+	int 	len;
+
+	size = 0;
+	sim->read_line = NULL;
 	if (FT_DEV && ++sim->test_i == FT_STOP)
 		ft_err_exit(sim, "(dev) STOP", 1);
-	if (!get_next_line(0, &sim->read_line))
+	len = getline(&sim->read_line, &size, stdin);
+	if (len == -1)
 	{
 		ft_strdel(&sim->read_line);
 		return (1);
 	}
+	*(sim->read_line + --len) = '\0';
 	ft_bzero(order, sizeof(t_order));
 	if (*sim->read_line == 'O')
 		ft_get_order(sim, order);
