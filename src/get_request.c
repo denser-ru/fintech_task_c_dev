@@ -9,8 +9,7 @@ int	ft_get_request(t_sim *sim, t_order *order)
 	size_t	size;
 	int 	len;
 
-	size = 0;
-	sim->read_line = NULL;
+	size = FT_BUF_SIZE;
 	if (FT_DEV && ++sim->test_i == FT_STOP)
 		ft_err_exit(sim, "(dev) STOP", 1);
 	len = getline(&sim->read_line, &size, stdin);
@@ -27,7 +26,7 @@ int	ft_get_request(t_sim *sim, t_order *order)
 		ft_get_cancel(sim, order);
 	else
 		ft_err_exit(sim, "ошибка формата ввода данных", 1);
-	ft_strdel(&sim->read_line);
+//	ft_strdel(&sim->read_line);
 	return (0);
 }
 

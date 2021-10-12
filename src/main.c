@@ -20,6 +20,7 @@ int	ft_init(t_sim **sim)
 	if (!*sim)
 		return (1);
 	++(*sim)->transactions;
+	(*sim)->read_line = (char *)malloc(sizeof(char) * FT_BUF_SIZE);
 	return (0);
 }
 
