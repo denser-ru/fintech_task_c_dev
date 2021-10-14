@@ -7,13 +7,14 @@
 # define	FT_DEV			0
 # define	FT_STOP			2200
 # define	FT_STOP_TRANS	1234
+# define	FT_LINE_BUF		20
 
 typedef struct s_sim	t_sim;
 typedef struct s_order	t_order;
 
 struct s_sim
 {
-	char		*read_line;
+	char		read_line[FT_LINE_BUF + 1];
 	t_list		*s_orders;
 	t_list		*b_orders;
 	size_t		transactions;
@@ -68,6 +69,12 @@ int		ft_order_b_ex(t_sim *sim, t_order *order);
 ** ft_exit.c
 */
 int		ft_err_exit(t_sim *sim, char *msg, int err);
+
+/*
+** gnl_l.c
+*/
+int				gnl_l(int fd, char *line);
+
 
 /*
 ** tests.c

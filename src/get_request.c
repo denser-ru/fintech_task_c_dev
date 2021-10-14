@@ -5,11 +5,13 @@ static int	ft_get_cancel(t_sim *sim, t_order *order);
 
 int	ft_get_request(t_sim *sim, t_order *order)
 {
+	if (sim->transactions == 7689)
+		sim->transactions += 0;
 	if (FT_DEV && ++sim->test_i == FT_STOP)
 		ft_err_exit(sim, "(dev) STOP", 1);
-	if (!get_next_line(0, &sim->read_line))
+	if (gnl_l(0, sim->read_line) == -1)
 	{
-		ft_strdel(&sim->read_line);
+//		ft_strdel(&sim->read_line);
 		return (1);
 	}
 	ft_bzero(order, sizeof(t_order));
@@ -19,7 +21,7 @@ int	ft_get_request(t_sim *sim, t_order *order)
 		ft_get_cancel(sim, order);
 	else
 		ft_err_exit(sim, "ошибка формата ввода данных", 1);
-	ft_strdel(&sim->read_line);
+//	ft_strdel(&sim->read_line);
 	return (0);
 }
 

@@ -9,7 +9,7 @@ FTDIR   = ./libft/
 INCL	= $(wildcard $(INCDIR)*.h)
 
 SRC =	main.c get_request.c ex_request.c order_get_functions.c order_add.c \
- 		order_ex.c exit.c tests.c
+ 		order_ex.c exit.c gnl_l.c tests.c
 
 OBJ	=	$(addprefix $(OBJDIR),$(SRC:.c=.o))
 

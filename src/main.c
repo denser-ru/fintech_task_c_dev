@@ -36,7 +36,7 @@ void	ft_sim_mem_clear(t_sim **sim)
 {
 	ft_lstdel(&(*sim)->s_orders, ft_lstdelcontent);
 	ft_lstdel(&(*sim)->b_orders, ft_lstdelcontent);
-	ft_strdel(&(*sim)->read_line);
+//	ft_strdel(&(*sim)->read_line);
 	free(*sim);
 	*sim = NULL;
 }
