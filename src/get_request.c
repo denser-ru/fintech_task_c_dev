@@ -5,8 +5,6 @@ static int	ft_get_cancel(t_sim *sim, t_order *order);
 
 int	ft_get_request(t_sim *sim, t_order *order)
 {
-	if (sim->transactions == 7689)
-		sim->transactions += 0;
 	if (FT_DEV && ++sim->test_i == FT_STOP)
 		ft_err_exit(sim, "(dev) STOP", 1);
 	if (gnl_l(0, sim->read_line) == -1)

@@ -7,7 +7,7 @@
 # define	FT_DEV			0
 # define	FT_STOP			2200
 # define	FT_STOP_TRANS	1234
-# define	FT_LINE_BUF		20
+# define	FT_LINE_BUF		512
 
 typedef struct s_sim	t_sim;
 typedef struct s_order	t_order;
