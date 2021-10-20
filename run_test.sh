@@ -1,10 +1,8 @@
 #!/bin/bash
 
-cd fintech_task_c_dev
-
 COLOR='\e[34m'
 
-ver="dev-v1.x dev-v1.x-printf"
+ver="dev-v1.x dev-v1.x-printf dev-v1.x-getline_m dev-v1.x-getline_m2 dev-v1.x-gnl_l"
 
 if [ -z "$1" ]
 then
@@ -13,7 +11,9 @@ else
   n=$1
 fi
 
-echo -e "\nУстановлено значени количества измерений на одну версию - ${n}"
+res="\nУстановлено значени количества измерений на одну версию - ${n}"
+echo -e $res
+echo -e $res >> tests/res.log
 sleep 0.5
 
 function metric {
@@ -24,7 +24,7 @@ function metric {
   for (( i = 0; i < n; i++ ))
   do
     res1=$(date +%s.%N)
-    cat data/input.txt | ./simulator > /dev/null
+    cat data/input.txt | ./simulator
     res2=$(date +%s.%N)
     TEST=$(echo "$res2 - $res1" | bc)
     if [[ -z $MIN ]]
@@ -48,22 +48,28 @@ function metric {
   MIN=$(bc<<<"scale=4;$MIN/1")
   MAX=$(bc<<<"scale=4;$MAX/1")
   echo -en "${COLOR}"
-  echo -e "Версия $(git branch --show-current) \t--> \tmin: 0${MIN};  max: 0${MAX};  avr: 0${AVR}"
+  res="Версия $(git branch --show-current) \t--> \tmin: 0${MIN};  max: 0${MAX};  avr: 0${AVR}"
+  echo -e $res
+  echo -e $res >> tests/res.log
   echo -en "\e[0m"
 }
 
 for v in $ver
 do
-  git checkout ${v}
   echo
+  git checkout ${v}
   echo -n "Сборка образца ${v}"
-  if (( $(make > /dev/null) ))
+  if (( $(make re > /dev/null) ))
     then
-      echo " - [ERR]"
+      echo -e " \t--- [ERR]"
       exit 1
     else
-      echo " - [OK]"
+      echo -e " \t--- [OK]"
     fi
   echo -n "Измерение "
   metric
 done
+
+echo -e "***********\n\n" >> tests/res.log
+
+tail tests/res.log
